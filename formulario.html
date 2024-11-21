@@ -1,0 +1,77 @@
+
+<!DOCTYPE html> <!-- Declara o tipo de documento, indicando que é uma página HTML5 -->
+<html lang="pt-BR"> <!-- Inicia a página HTML e define o idioma como português do Brasil -->
+<head>
+  <meta charset="UTF-8"> <!-- Define o conjunto de caracteres como UTF-8, para suportar acentos e caracteres especiais -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna a página responsiva em dispositivos móveis -->
+  <title>Formulário de Contato</title> <!-- Título da página, que aparece na aba do navegador -->
+  <link rel="stylesheet" href="style.css"> <!-- Link para o arquivo de estilo (CSS) externo -->
+  
+    
+<body>
+    <header>
+      
+
+    <img src="titulo.jpeg" width="900" height="201" />
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="sobre-nos.html">Sobre Nós</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="depoimentos.html">Depoimentos</a>
+        <a href="formulario.html">Formulário</a>
+        <a href="contatos.html">Contatos</a>
+    </nav>
+    <main>
+
+
+
+
+
+
+</head>
+<body>
+  <div class="form-container"> <!-- Contêiner que envolve o formulário -->
+    <form id="contact-form"> <!-- Define um formulário com id "contact-form" -->
+      <h2>Entre em Contato</h2> <!-- Título do formulário -->
+      <label for="name">Nome</label> <!-- Rótulo para o campo de nome -->
+      <input type="text" id="name" name="name" required> <!-- Campo de entrada de texto para o nome do usuário, obrigatório -->
+
+      <label for="email">Email</label> <!-- Rótulo para o campo de email -->
+      <input type="email" id="email" name="email" required> <!-- Campo de entrada para o email, obrigatório e com validação de formato -->
+
+      <label for="message">Mensagem</label> <!-- Rótulo para o campo de mensagem -->
+      <textarea id="message" name="message" rows="4" required></textarea> <!-- Caixa de texto para a mensagem, com 4 linhas visíveis e obrigatório -->
+
+      <button type="submit">Enviar</button> <!-- Botão para enviar o formulário -->
+    </form>
+    <p id="status"></p> <!-- Parágrafo onde será exibido o status de envio da mensagem (sucesso ou erro) -->
+  </div>
+
+  <!-- Script EmailJS -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script> <!-- Carrega a biblioteca do EmailJS para enviar e-mails -->
+  <script>
+    // Inicializa o EmailJS com seu User ID
+    (function() {
+      emailjs.init("L03b-dnp7KgDPEQIQ"); // Substitua com seu User ID (CHAVE PÚBLICA)
+    })();
+
+    // Escuta o evento de envio do formulário
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Impede o envio padrão do formulário (evita recarregar a página)
+
+      const serviceID = "service_dyor3w8"; // Substitua com seu Service ID do EmailJS
+      const templateID = "template_5po3r6f"; // Substitua com seu Template ID do EmailJS
+
+      // Envia o formulário para o EmailJS
+      emailjs.sendForm(serviceID, templateID, this)
+        .then(() => { // Se o envio for bem-sucedido
+          document.getElementById("status").innerHTML = "Mensagem enviada com sucesso!"; // Exibe a mensagem de sucesso
+          this.reset(); // Reseta o formulário, limpando os campos
+        }, { // Se ocorrer um erro
+        
+        });
+    });
+  </script>
+</body>
+</html>
